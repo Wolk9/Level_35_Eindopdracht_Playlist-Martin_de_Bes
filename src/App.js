@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "./state/index";
 
 function App() {
+  const song = useSelector((state) => state.song);
+  const dispatch = useDispatch();
+
+  const { depositMoney, withdrawMoney } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
+  console.log(song);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>{song}</h2>
+      <button onClick={() => depositMoney(1)}>Add Song</button>
+      <button onClick={() => withdrawMoney(1)}>Remove Song</button>
     </div>
   );
 }
