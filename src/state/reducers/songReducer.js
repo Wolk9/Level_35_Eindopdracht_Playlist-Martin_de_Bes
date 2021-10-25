@@ -1,20 +1,15 @@
-const initialState = [
-  {
-    id: 0,
-    title: "",
-    artist: "",
-    genre: "",
-    rating: 1
-  }
-];
+const initialState = [];
 
-const temporaryState = 0;
-const songReducer = (state = 0, action) => {
+// const temporaryState = 0;
+const songReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "deposit":
-      return state + action.payload;
-    case "withdraw":
-      return state - action.payload;
+    case "ADD_SONG":
+      console.log("state: ", state, "payload: ", action.payload);
+      const newList = [...state, action.payload];
+      return newList;
+
+    case "REMOVE_SONG":
+      return;
     default:
       return state;
   }
