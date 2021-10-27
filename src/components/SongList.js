@@ -12,8 +12,6 @@ const SongList = (props) => {
   );
 };
 
-const Record = (record) => {};
-
 const Header = () => {
   return (
     <div className="flex-container">
@@ -32,8 +30,11 @@ const Rows = () => {
 
   console.log(record);
 
-  const handleClick = (id) => {
-    removeSong(id);
+  const handleClick = (event) => {
+    console.log("HandleClick: ", event.target.id);
+    removeSong({
+      id: event.target.id
+    });
   };
 
   const recordList = record.map((record) => {
@@ -44,7 +45,9 @@ const Rows = () => {
         <div className="flex-item">{record.artist}</div>
         <div className="flex-item">{record.genre}</div>
         <div className="flex-item">{record.rating}</div>
-        <button onClick={handleClick}>-</button>
+        <button key={record.id} id={record.id} onClick={handleClick}>
+          -
+        </button>
       </div>
     );
   });
