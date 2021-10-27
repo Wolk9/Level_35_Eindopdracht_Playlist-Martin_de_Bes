@@ -32,8 +32,9 @@ const Rows = () => {
 
   const handleClick = (event) => {
     console.log("HandleClick: ", event.target.id);
+    let numID = Number(event.target.id);
     removeSong({
-      id: event.target.id
+      id: numID
     });
   };
 
