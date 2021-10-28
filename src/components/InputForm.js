@@ -1,151 +1,97 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import { reduxForm, Field } from "redux-form";
 import { actionCreators } from "../state/index";
-// import InputField from "./InputField";
-// import RatingField from "./RatingField";
 
 const InputForm = (props) => {
-  // const song = useSelector((state) => state.song);
   const dispatch = useDispatch();
+  const { handleSubmit, pristine, submitting, reset } = props;
+  const formValues = useSelector((state) => state.form);
 
   const { addSong } = bindActionCreators(actionCreators, dispatch);
 
-  const [titleValue, setTitleValue] = useState("");
-  const [artistValue, setAristValue] = useState("");
-  const [genreValue, setGenreValue] = useState("pop");
-  const [ratingValue, setRatingValue] = useState(1);
-
-  const handleOnChange = (event) => {
-    console.log(event.target.id);
-    switch (event.target.id) {
-      case "title":
-        setTitleValue(event.target.value);
-        break;
-      case "artist":
-        setAristValue(event.target.value);
-        break;
-      case "genre":
-        console.log("case genre");
-        setGenreValue(event.target.value);
-        break;
-      case "rating":
-        console.log("case rating");
-        setRatingValue(event.target.value);
-        break;
-      default:
-        console.log("case default");
-    }
-  };
+  console.log(formValues);
 
   const handleOnSubmit = (event) => {
-    switch (event.target.id) {
-      case "disabled":
-        console.log("cancel");
-        alert("Je moet ook een titel of een artiest invullen");
-        break;
-      default:
-        let timestamp = new Date().getTime() * Math.random();
-        console.log(
-          timestamp,
-          artistValue,
-          titleValue,
-          genreValue,
-          ratingValue
-        );
-        addSong({
-          id: timestamp,
-          title: titleValue,
-          artist: artistValue,
-          genre: genreValue,
-          rating: ratingValue
-        });
-    }
+    let timestamp = new Date().getTime() * Math.random();
+    console.log(
+      timestamp,
+      formValues.input.values.title,
+      formValues.input.values.artist,
+      formValues.input.values.genre,
+      formValues.input.values.rating
+    );
+    addSong({
+      id: timestamp,
+      title: formValues.input.values.title,
+      artist: formValues.input.values.artist,
+      genre: formValues.input.values.genre,
+      rating: formValues.input.values.rating
+    });
   };
 
-  console.log(titleValue, artistValue, genreValue, ratingValue);
-  let button;
-  if (titleValue === "" || artistValue === "") {
-    button = (
-      <button
-        id="disabled"
-        onClick={handleOnSubmit}
-        type="cancel"
-        className="addButton disabled"
-      >
+  let button = (
+    <div>
+      <button type="submit" disabled={pristine || submitting}>
         +
       </button>
-    );
-  } else {
-    button = (
-      <button
-        id="enabled"
-        onClick={handleOnSubmit}
-        className="addButton"
-        type="submit"
-      >
-        +
+      <button type="button" disabled={pristine || submitting} onClick={reset}>
+        Clear
       </button>
-    );
-  }
+    </div>
+  );
 
   return (
-    <div className="input-form flex-container">
-      <form>
-        <label for="title">Title</label>
-        <input
-          onChange={handleOnChange}
-          id="title"
-          name="title"
-          type="text"
-          value={titleValue}
-        ></input>
+    <div>
+      <form
+        onSubmit={handleSubmit(handleOnSubmit)}
+        className="input-formValues flex-container"
+      >
+        <div className="input-field flex-item">
+          <label for="title">Title</label>
+          <Field
+            name="title"
+            component="input"
+            type="text"
+            placeholder="Titel..."
+          />
+        </div>
+        <div className="input-field flex-item">
+          <label for="artist">Artist</label>
+          <Field
+            component="input"
+            name="artist"
+            type="text"
+            placeholder="Artiest..."
+          />
+        </div>
+        <div className="input-field flex-item">
+          <label for="genre">Genre</label>
+          <Field name="genre" component="select">
+            <option value="pop">Pop</option>
+            <option value="rock">Rock</option>
+            <option value="funk">Funk</option>
+            <option value="disco">Disco</option>
+            <option value="jazz">Jazz</option>
+          </Field>
+        </div>
+        <div className="input-field flex-item">
+          <label for="rating">Rating</label>
+          <Field name="rating" component="select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </Field>
+        </div>
+        <div className="input-field flex-item">{button}</div>
       </form>
-      <form>
-        <label for="artist">Artist</label>
-        <input
-          onChange={handleOnChange}
-          id="artist"
-          name="artist"
-          type="text"
-          value={artistValue}
-        ></input>
-      </form>
-      <form>
-        <label for="genre">Genre</label>
-        <select
-          onChange={handleOnChange}
-          id="genre"
-          name="genre"
-          type="text"
-          value={genreValue}
-        >
-          <option value="pop">Pop</option>
-          <option value="rock">Rock</option>
-          <option value="funk">Funk</option>
-          <option value="disco">Disco</option>
-          <option value="jazz">Jazz</option>
-        </select>
-      </form>
-      <form>
-        <label for="rating">Rating</label>
-        <select
-          onChange={handleOnChange}
-          id="rating"
-          name="rating"
-          type="text"
-          value={ratingValue}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </form>
-      <div className="input-field flex-item">{button}</div>
     </div>
   );
 };
 
-export default InputForm;
+export default reduxForm({
+  form: "input"
+})(InputForm);
