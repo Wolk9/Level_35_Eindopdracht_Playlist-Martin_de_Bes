@@ -42,11 +42,16 @@ const Rows = () => {
     console.log(record);
     return (
       <div key={record.id} id={record.id} className="flex-container play-list">
-        <div className="flex-item">{record.title}</div>
-        <div className="flex-item">{record.artist}</div>
-        <div className="flex-item">{record.genre}</div>
-        <div className="flex-item">{record.rating}</div>
-        <button key={record.id} id={record.id} onClick={handleClick}>
+        <div className="flex-item title">{record.title}</div>
+        <div className="flex-item artist">{record.artist}</div>
+        <div className="flex-item genre">{record.genre}</div>
+        <div className="flex-item rating">{record.rating}</div>
+        <button
+          className="flex-item deletebutton"
+          key={record.id}
+          id={record.id}
+          onClick={handleClick}
+        >
           -
         </button>
       </div>

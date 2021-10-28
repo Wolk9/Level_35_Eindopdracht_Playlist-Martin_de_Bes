@@ -4,7 +4,8 @@
 }
 
 body {
-  margin: 0;
+  margin: 0px 20px;
+  padding: 10px 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,8 +40,23 @@ code {
 }
 
 .flex-item {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   max-width: 25%;
+  margin: 0px 10px;
+  text-align: left;
+}
+.flex-item .artist,
+.flex-item .title {
+  width: 200px;
+}
+.flex-item .genre {
+  width: 100px;
+}
+.flex-item .rating {
+  width: 50px;
+}
+.flex-item .deletebutton {
+  max-width: 20px;
 }
 
 .input-field {
