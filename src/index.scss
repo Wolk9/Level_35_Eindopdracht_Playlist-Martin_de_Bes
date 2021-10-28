@@ -21,14 +21,30 @@ code {
   background-color: cadetblue;
 }
 
+.input-form {
+  background-color: cadetblue;
+  padding: 5px;
+  border-bottom: 5px solid #fff;
+  border-radius: 0 0 10px 10px;
+}
+
 .flex-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
   color: whitesmoke;
 }
+
+.flex-container-header {
+  // background-color: cadetblue;
+  margin-top: 20px;
+  padding: 5px;
+  border-bottom: 5px solid #fff;
+  border-radius: 10px 10px 0 0;
+}
 .flex-item {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  max-width: 25%;
 }
 .input-field {
   background-color: cadetblue;

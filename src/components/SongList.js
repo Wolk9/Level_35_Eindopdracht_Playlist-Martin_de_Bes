@@ -14,7 +14,7 @@ const SongList = (props) => {
 
 const Header = () => {
   return (
-    <div className="flex-container">
+    <div className="flex-container flex-container-header">
       <div className="flex-item">Title</div>
       <div className="flex-item">Artist</div>
       <div className="flex-item">Genre</div>

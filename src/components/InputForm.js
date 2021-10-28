@@ -29,6 +29,7 @@ const InputForm = (props) => {
       genre: formValues.input.values.genre,
       rating: formValues.input.values.rating
     });
+    dispatch(reset("InputForm"));
   };
 
   let button = (
@@ -46,11 +47,12 @@ const InputForm = (props) => {
     <div>
       <form
         onSubmit={handleSubmit(handleOnSubmit)}
-        className="input-formValues flex-container"
+        className="input-form flex-container"
       >
         <div className="input-field flex-item">
           <label for="title">Title</label>
           <Field
+            autoFocus="true"
             name="title"
             component="input"
             type="text"
