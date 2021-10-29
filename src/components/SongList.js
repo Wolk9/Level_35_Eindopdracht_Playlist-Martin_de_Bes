@@ -2,6 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../state/index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { sort-up, sort-down } from "@fortawesome/free-solid-svg-icons";
+// import {
+//   solid,
+//   regular,
+//   brands
+// } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
 const SongList = (props) => {
   return (
@@ -12,13 +19,20 @@ const SongList = (props) => {
   );
 };
 
+
+
+
 const Header = () => {
   return (
     <div className="flex-container flex-container-header">
-      <div className="flex-item">Title</div>
-      <div className="flex-item">Artist</div>
-      <div className="flex-item">Genre</div>
-      <div className="flex-item">Rating</div>
+      <div className="flex-item">Title<FontAwesomeIcon icon="fa-solid fa-sort-up" />
+<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
+      <div className="flex-item">Artist<FontAwesomeIcon icon="fa-solid fa-sort-up" />
+<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
+      <div className="flex-item">Genre<FontAwesomeIcon icon="fa-solid fa-sort-up" />
+<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
+      <div className="flex-item">Rating<FontAwesomeIcon icon="fa-solid fa-sort-up" />
+<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
     </div>
   );
 };
