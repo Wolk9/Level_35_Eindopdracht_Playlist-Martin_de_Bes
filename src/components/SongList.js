@@ -17,69 +17,80 @@ const SongList = (props) => {
   );
 };
 
-const sortedList = (list) => {
-  const sortList = [...list].sort((a, b) => a.artist - b.artist);
-  console.log(sortList);
-  return sortList;
-};
+// const sortedList = (list) => {
+//   const sortList = [...list].sort((a, b) => a.artist - b.artist);
+//   console.log(sortList);
+//   return sortList;
+// };
 
-const sortedList2 = (list, column, order) => {
-  console.log("sortedList", list, column, order);
-  let newList;
-  switch (column) {
-    case "title":
-      switch (order) {
-        case "asc":
-          newList = list.sort((a, b) => {
-            console.log(a.title, b.title);
-            return a.title - b.title;
-          });
-          console.log(newList);
-          return newList;
-        case "desc":
-          newList = list.sort((a, b) => b.title - a.title);
-          console.log(newList);
-          return newList;
-        default:
-          return list;
-      }
-    case "artist":
-      switch (order) {
-        case "asc":
-          return (list = list.sort((a, b) => a.artist - b.artist));
-        case "desc":
-          return (list = list.sort((a, b) => b.artist - a.artist));
-        default:
-          return list;
-      }
-    case "genre":
-      switch (order) {
-        case "asc":
-          return (list = list.sort((a, b) => a.genre - b.genre));
-        case "desc":
-          return (list = list.sort((a, b) => b.genre - a.genre));
-        default:
-          return list;
-      }
-    case "rating":
-      switch (order) {
-        case "asc":
-          return (list = list.sort((a, b) => a.genre - b.genre));
-        case "desc":
-          return (list = list.sort((a, b) => b.genre - a.genre));
-        default:
-          return list;
-      }
-    default: {
-      return list;
-    }
+// const sortedList2 = (list, column, order) => {
+//   console.log("sortedList", list, column, order);
+//   let newList;
+//   switch (column) {
+//     case "title":
+//       switch (order) {
+//         case "asc":
+//           newList = list.sort((a, b) => {
+//             console.log(a.title, b.title);
+//             return a.title - b.title;
+//           });
+//           console.log(newList);
+//           return newList;
+//         case "desc":
+//           newList = list.sort((a, b) => b.title - a.title);
+//           console.log(newList);
+//           return newList;
+//         default:
+//           return list;
+//       }
+//     case "artist":
+//       switch (order) {
+//         case "asc":
+//           return (list = list.sort((a, b) => a.artist - b.artist));
+//         case "desc":
+//           return (list = list.sort((a, b) => b.artist - a.artist));
+//         default:
+//           return list;
+//       }
+//     case "genre":
+//       switch (order) {
+//         case "asc":
+//           return (list = list.sort((a, b) => a.genre - b.genre));
+//         case "desc":
+//           return (list = list.sort((a, b) => b.genre - a.genre));
+//         default:
+//           return list;
+//       }
+//     case "rating":
+//       switch (order) {
+//         case "asc":
+//           return (list = list.sort((a, b) => a.genre - b.genre));
+//         case "desc":
+//           return (list = list.sort((a, b) => b.genre - a.genre));
+//         default:
+//           return list;
+//       }
+//     default: {
+//       return list;
+//     }
+//   }
+// };
+
+const sortByKey = (key, order) => {
+  switch (order) {
+    case "asc":
+      return (a, b) => (a[key] > b[key] ? 1 : -1);
+    case "desc":
+      return (a, b) => (b[key] > a[key] ? 1 : -1);
+    default:
+      return;
   }
 };
 
 const Header = () => {
   const record = useSelector((state) => state.song);
 
-  console.log(sortedList(record));
+  // console.log(sortedList(record));
 
   return (
     <div className="flex-container flex-container-header">
@@ -87,44 +98,44 @@ const Header = () => {
         Title
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          onClick={() => sortedList(record, "title", "asc")}
+          onClick={() => sortByKey("title", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          onClick={() => sortedList(record, "title", "desc")}
+          onClick={() => sortByKey("title", "desc")}
         />
       </div>
       <div className="flex-item">
         Artist
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          onClick={() => sortedList(record, "artist", "asc")}
+          // onClick={() => sortedList(record, "artist", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          onClick={() => sortedList(record, "artist", "desc")}
+          // onClick={() => sortedList(record, "artist", "desc")}
         />
       </div>
       <div className="flex-item">
         Genre
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          onClick={() => sortedList(record, "genre", "asc")}
+          // onClick={() => sortedList(record, "genre", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          onClick={() => sortedList(record, "genre", "desc")}
+          // onClick={() => sortedList(record, "genre", "desc")}
         />
       </div>
       <div className="flex-item">
         Rating
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          onClick={() => sortedList(record, "rating", "asc")}
+          // onClick={() => sortedList(record, "rating", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          onClick={() => sortedList(record, "rating", "desc")}
+          // onClick={() => sortedList(record, "rating", "desc")}
         />
       </div>
     </div>
@@ -133,8 +144,10 @@ const Header = () => {
 
 const Rows = () => {
   const dispatch = useDispatch();
-  const record = useSelector((state) => state.song);
+  const unsortedRecord = useSelector((state) => state.song);
   const { removeSong } = bindActionCreators(actionCreators, dispatch);
+
+  const record = unsortedRecord.slice().sort(sortByKey("title", "asc"));
 
   console.log(record);
 

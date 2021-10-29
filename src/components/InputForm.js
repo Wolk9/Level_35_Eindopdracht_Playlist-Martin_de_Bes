@@ -30,7 +30,6 @@ const InputForm = (props) => {
       rating: formValues.input.values.rating
     });
     dispatch(reset("InputForm"));
-    dispatch(change(formValues.input.fields.title.active, true));
   };
 
   let button = (
