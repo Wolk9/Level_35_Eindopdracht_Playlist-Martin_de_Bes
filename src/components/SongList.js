@@ -3,12 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../state/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { sort-up, sort-down } from "@fortawesome/free-solid-svg-icons";
-// import {
-//   solid,
-//   regular,
-//   brands
-// } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
+import {
+  faSortAlphaDown,
+  faSortAlphaUp
+} from "@fortawesome/free-solid-svg-icons";
 
 const SongList = (props) => {
   return (
@@ -19,20 +17,116 @@ const SongList = (props) => {
   );
 };
 
+const sortedList = (list) => {
+  const sortList = [...list].sort((a, b) => a.artist - b.artist);
+  console.log(sortList);
+  return sortList;
+};
 
-
+const sortedList2 = (list, column, order) => {
+  console.log("sortedList", list, column, order);
+  let newList;
+  switch (column) {
+    case "title":
+      switch (order) {
+        case "asc":
+          newList = list.sort((a, b) => {
+            console.log(a.title, b.title);
+            return a.title - b.title;
+          });
+          console.log(newList);
+          return newList;
+        case "desc":
+          newList = list.sort((a, b) => b.title - a.title);
+          console.log(newList);
+          return newList;
+        default:
+          return list;
+      }
+    case "artist":
+      switch (order) {
+        case "asc":
+          return (list = list.sort((a, b) => a.artist - b.artist));
+        case "desc":
+          return (list = list.sort((a, b) => b.artist - a.artist));
+        default:
+          return list;
+      }
+    case "genre":
+      switch (order) {
+        case "asc":
+          return (list = list.sort((a, b) => a.genre - b.genre));
+        case "desc":
+          return (list = list.sort((a, b) => b.genre - a.genre));
+        default:
+          return list;
+      }
+    case "rating":
+      switch (order) {
+        case "asc":
+          return (list = list.sort((a, b) => a.genre - b.genre));
+        case "desc":
+          return (list = list.sort((a, b) => b.genre - a.genre));
+        default:
+          return list;
+      }
+    default: {
+      return list;
+    }
+  }
+};
 
 const Header = () => {
+  const record = useSelector((state) => state.song);
+
+  console.log(sortedList(record));
+
   return (
     <div className="flex-container flex-container-header">
-      <div className="flex-item">Title<FontAwesomeIcon icon="fa-solid fa-sort-up" />
-<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
-      <div className="flex-item">Artist<FontAwesomeIcon icon="fa-solid fa-sort-up" />
-<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
-      <div className="flex-item">Genre<FontAwesomeIcon icon="fa-solid fa-sort-up" />
-<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
-      <div className="flex-item">Rating<FontAwesomeIcon icon="fa-solid fa-sort-up" />
-<FontAwesomeIcon icon="fa-solid fa-sort-down" /></div>
+      <div className="flex-item">
+        Title
+        <FontAwesomeIcon
+          icon={faSortAlphaUp}
+          onClick={() => sortedList(record, "title", "asc")}
+        />
+        <FontAwesomeIcon
+          icon={faSortAlphaDown}
+          onClick={() => sortedList(record, "title", "desc")}
+        />
+      </div>
+      <div className="flex-item">
+        Artist
+        <FontAwesomeIcon
+          icon={faSortAlphaUp}
+          onClick={() => sortedList(record, "artist", "asc")}
+        />
+        <FontAwesomeIcon
+          icon={faSortAlphaDown}
+          onClick={() => sortedList(record, "artist", "desc")}
+        />
+      </div>
+      <div className="flex-item">
+        Genre
+        <FontAwesomeIcon
+          icon={faSortAlphaUp}
+          onClick={() => sortedList(record, "genre", "asc")}
+        />
+        <FontAwesomeIcon
+          icon={faSortAlphaDown}
+          onClick={() => sortedList(record, "genre", "desc")}
+        />
+      </div>
+      <div className="flex-item">
+        Rating
+        <FontAwesomeIcon
+          icon={faSortAlphaUp}
+          onClick={() => sortedList(record, "rating", "asc")}
+        />
+        <FontAwesomeIcon
+          icon={faSortAlphaDown}
+          onClick={() => sortedList(record, "rating", "desc")}
+        />
+      </div>
     </div>
   );
 };
