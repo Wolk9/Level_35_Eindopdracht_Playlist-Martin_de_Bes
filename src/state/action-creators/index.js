@@ -15,37 +15,3 @@ export const removeSong = (id) => {
     });
   };
 };
-
-// export const editTitle = (title) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: "EDIT_TITLE",
-//       payload: title
-//     });
-//   };
-// };
-// export const editArtist = (artist) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: "EDIT_ARTIST",
-//       payload: artist
-//     });
-//   };
-// };
-
-// export const editGenre = (genre) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: "EDIT_GENRE",
-//       payload: genre
-//     });
-//   };
-// };
-// export const editRating = (rating) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: "EDIT_RATING",
-//       payload: rating
-//     });
-//   };
-// };

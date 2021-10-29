@@ -6,7 +6,7 @@ import { actionCreators } from "../state/index";
 
 const InputForm = (props) => {
   const dispatch = useDispatch();
-  const { handleSubmit, pristine, submitting, reset } = props;
+  const { handleSubmit, pristine, submitting, reset, change } = props;
   const formValues = useSelector((state) => state.form);
 
   const { addSong } = bindActionCreators(actionCreators, dispatch);
@@ -30,6 +30,7 @@ const InputForm = (props) => {
       rating: formValues.input.values.rating
     });
     dispatch(reset("InputForm"));
+    dispatch(change(formValues.input.fields.title.active, true));
   };
 
   let button = (
