@@ -17,14 +17,14 @@ const SongList = (props) => {
   );
 };
 
-// const sortedList = (list) => {
+// const sortByKey = (list) => {
 //   const sortList = [...list].sort((a, b) => a.artist - b.artist);
 //   console.log(sortList);
 //   return sortList;
 // };
 
-// const sortedList2 = (list, column, order) => {
-//   console.log("sortedList", list, column, order);
+// const sortByKey2 = (list, column, order) => {
+//   console.log("sortByKey", list, column, order);
 //   let newList;
 //   switch (column) {
 //     case "title":
@@ -76,66 +76,72 @@ const SongList = (props) => {
 //   }
 // };
 
-const sortByKey = (key, order) => {
+const sortByKey = (key, order, record) => {
   switch (order) {
     case "asc":
-      return (a, b) => (a[key] > b[key] ? 1 : -1);
+      console.log(key, "asc");
+      const ascSortedList = (a, b) => (a[key] > b[key] ? 1 : -1);
+      console.log(ascSortedList);
+      return ascSortedList;
     case "desc":
-      return (a, b) => (b[key] > a[key] ? 1 : -1);
+      console.log(key, "desc");
+      const descSortedList = (a, b) => (b[key] > a[key] ? 1 : -1);
+      console.log(descSortedList);
+      return descSortedList;
     default:
       return;
   }
 };
 
+// const sortByKey = (key) => (a, b) => a[key] > b[key] ? 1 : -1;
+// const record = (key) => unSortedRecord.slice().sort(sortByKey(key));
+
 const Header = () => {
   const record = useSelector((state) => state.song);
-
-  // console.log(sortedList(record));
-
   return (
     <div className="flex-container flex-container-header">
       <div className="flex-item">
         Title
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          onClick={() => sortByKey("title", "asc")}
+          onClick={() => sortByKey("title", "asc", record)}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          onClick={() => sortByKey("title", "desc")}
+          onClick={() => sortByKey("title", "desc", record)}
         />
       </div>
       <div className="flex-item">
         Artist
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          // onClick={() => sortedList(record, "artist", "asc")}
+          onClick={() => sortByKey("artist", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          // onClick={() => sortedList(record, "artist", "desc")}
+          onClick={() => sortByKey("artist", "desc")}
         />
       </div>
       <div className="flex-item">
         Genre
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          // onClick={() => sortedList(record, "genre", "asc")}
+          onClick={() => sortByKey("genre", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          // onClick={() => sortedList(record, "genre", "desc")}
+          onClick={() => sortByKey("genre", "desc")}
         />
       </div>
       <div className="flex-item">
         Rating
         <FontAwesomeIcon
           icon={faSortAlphaUp}
-          // onClick={() => sortedList(record, "rating", "asc")}
+          onClick={() => sortByKey("rating", "asc")}
         />
         <FontAwesomeIcon
           icon={faSortAlphaDown}
-          // onClick={() => sortedList(record, "rating", "desc")}
+          onClick={() => sortByKey("rating", "desc")}
         />
       </div>
     </div>
