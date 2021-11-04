@@ -1,12 +1,4 @@
-const initialState = [
-  {
-    id: 123,
-    title: "jasmine",
-    artist: "breaky break",
-    genre: "pop",
-    rating: 4
-  }
-];
+const initialState = [];
 
 // const temporaryState = 0;
 const songReducer = (state = initialState, action) => {

@@ -30,7 +30,7 @@ const Header = () => {
         // const ascSortedList = record.sort((a, b) => (a[key] > b[key] ? 1 : -1));
         const ascSortedList = record.sort((a, b) => {
           console.log(a[key], b[key]);
-          return a[key] > b[key] ? 1 : -1;
+          return a[key] < b[key] ? 1 : -1;
         });
         console.log(ascSortedList);
         return storeResortedList(ascSortedList);
@@ -39,7 +39,7 @@ const Header = () => {
         // const descSortedList = record.sort((a, b) => (b[key] > a[key] ? 1 : -1));
         const descSortedList = record.sort((a, b) => {
           console.log(a[key], b[key]);
-          return a[key] < b[key] ? 1 : -1;
+          return a[key] > b[key] ? 1 : -1;
         });
         console.log(descSortedList);
         return storeResortedList(descSortedList);
@@ -94,7 +94,7 @@ const Header = () => {
           onClick={() => sortByKey("rating", "desc", record)}
         />
       </div>
-      a
+      <div className="flex-item"></div>
     </div>
   );
 };
