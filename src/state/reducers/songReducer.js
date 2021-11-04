@@ -20,6 +20,9 @@ const songReducer = (state = initialState, action) => {
       const newState = state.filter((song) => song.id !== action.payload.id);
       console.log(newState);
       return newState;
+    case "STORE_RESORTED_LIST":
+      console.log("sort list", action.payload);
+      return [...action.payload];
     default:
       return state;
   }

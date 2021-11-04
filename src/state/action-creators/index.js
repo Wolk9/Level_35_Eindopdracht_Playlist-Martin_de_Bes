@@ -15,3 +15,12 @@ export const removeSong = (id) => {
     });
   };
 };
+
+export const storeResortedList = (newList) => {
+  return (dispatch) => {
+    dispatch({
+      type: "STORE_RESORTED_LIST",
+      payload: newList
+    });
+  };
+};

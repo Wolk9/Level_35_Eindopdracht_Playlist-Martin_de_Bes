@@ -11,7 +11,7 @@ const InputForm = (props) => {
 
   const { addSong } = bindActionCreators(actionCreators, dispatch);
 
-  console.log(formValues);
+  // console.log(formValues);
 
   const handleOnSubmit = (event) => {
     let timestamp = new Date().getTime() * Math.random();
@@ -52,7 +52,7 @@ const InputForm = (props) => {
         <div className="input-field flex-item">
           <label for="title">Title</label>
           <Field
-            autoFocus="true"
+            autoFocus={true}
             name="title"
             component="input"
             type="text"
