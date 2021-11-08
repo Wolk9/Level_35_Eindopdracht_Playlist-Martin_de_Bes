@@ -34,6 +34,7 @@ const InputForm = (props) => {
 
   let button = (
     <div>
+      <br />
       <button type="submit" disabled={pristine || submitting}>
         +
       </button>
@@ -44,52 +45,58 @@ const InputForm = (props) => {
   );
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit(handleOnSubmit)}
-        className="input-form flex-container"
-      >
-        <div className="input-field flex-item">
-          <label for="title">Title</label>
-          <Field
-            autoFocus={true}
-            name="title"
-            component="input"
-            type="text"
-            placeholder="Titel..."
-          />
-        </div>
-        <div className="input-field flex-item">
-          <label for="artist">Artist</label>
-          <Field
-            component="input"
-            name="artist"
-            type="text"
-            placeholder="Artiest..."
-          />
-        </div>
-        <div className="input-field flex-item">
-          <label for="genre">Genre</label>
-          <Field name="genre" component="select">
-            <option value="pop">Pop</option>
-            <option value="rock">Rock</option>
-            <option value="funk">Funk</option>
-            <option value="disco">Disco</option>
-            <option value="jazz">Jazz</option>
-          </Field>
-        </div>
-        <div className="input-field flex-item">
-          <label for="rating">Rating</label>
-          <Field name="rating" component="select">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </Field>
-        </div>
-        <div className="input-field flex-item">{button}</div>
-      </form>
+    <div className="table-container">
+      <div className="">
+        <form
+          onSubmit={handleSubmit(handleOnSubmit)}
+          className="input-form flex-table"
+        >
+          <div className="input-field flex-row header-title title">
+            <label for="title">Title</label>
+            <Field
+              autoFocus={true}
+              name="title"
+              component="input"
+              type="text"
+              placeholder="Titel..."
+            />
+          </div>
+          <div className="input-field flex-row header-title artist">
+            <label for="artist">Artist</label>
+            <Field
+              component="input"
+              name="artist"
+              type="text"
+              placeholder="Artiest..."
+            />
+          </div>
+          <div className="input-field flex-row header-title genre">
+            <label for="genre">Genre</label>
+            <br />
+            <Field name="genre" component="select">
+              <option value="pop">Pop</option>
+              <option value="rock">Rock</option>
+              <option value="funk">Funk</option>
+              <option value="disco">Disco</option>
+              <option value="jazz">Jazz</option>
+            </Field>
+          </div>
+          <div className="input-field flex-row header-title rating">
+            <label for="rating">Rating</label>
+            <br />
+            <Field name="rating" component="select">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </Field>
+          </div>
+          <div className="input-field flex-row header-title deletebutton">
+            {button}
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

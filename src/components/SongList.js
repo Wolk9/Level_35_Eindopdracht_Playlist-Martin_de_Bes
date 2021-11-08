@@ -5,12 +5,14 @@ import { actionCreators } from "../state/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSortAlphaDown,
-  faSortAlphaUp
+  faSortAlphaUp,
+  faRecycle,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 
 const SongList = (props) => {
   return (
-    <div className="song-list">
+    <div className="table-container">
       <Header />
       <Rows />
     </div>
@@ -49,8 +51,8 @@ const Header = () => {
   };
 
   return (
-    <div className="flex-container flex-container-header">
-      <div className="flex-item">
+    <div className="flex-table header">
+      <div className="flex-row header-title title">
         Title
         <FontAwesomeIcon
           icon={faSortAlphaUp}
@@ -61,7 +63,7 @@ const Header = () => {
           onClick={() => sortByKey("title", "desc", record)}
         />
       </div>
-      <div className="flex-item">
+      <div className="flex-row  header-title artist">
         Artist
         <FontAwesomeIcon
           icon={faSortAlphaUp}
@@ -72,7 +74,7 @@ const Header = () => {
           onClick={() => sortByKey("artist", "desc", record)}
         />
       </div>
-      <div className="flex-item">
+      <div className="flex-row header-title genre">
         Genre
         <FontAwesomeIcon
           icon={faSortAlphaUp}
@@ -83,7 +85,7 @@ const Header = () => {
           onClick={() => sortByKey("genre", "desc", record)}
         />
       </div>
-      <div className="flex-item">
+      <div className="flex-row header-title rating">
         Rating
         <FontAwesomeIcon
           icon={faSortAlphaUp}
@@ -94,7 +96,7 @@ const Header = () => {
           onClick={() => sortByKey("rating", "desc", record)}
         />
       </div>
-      <div className="flex-item"></div>
+      <div className="flex-row header-title deletebutton"></div>
     </div>
   );
 };
@@ -121,19 +123,16 @@ const Rows = () => {
   const recordList = record.map((record) => {
     console.log(record);
     return (
-      <div key={record.id} id={record.id} className="flex-container play-list">
-        <div className="flex-item title">{record.title}</div>
-        <div className="flex-item artist">{record.artist}</div>
-        <div className="flex-item genre">{record.genre}</div>
-        <div className="flex-item rating">{record.rating}</div>
-        <button
-          className="flex-item deletebutton"
-          key={record.id}
-          id={record.id}
-          onClick={handleClick}
-        >
-          -
-        </button>
+      <div key={record.id} id={record.id} className="flex-table row">
+        <div className="flex-row title">{record.title}</div>
+        <div className="flex-row artist">{record.artist}</div>
+        <div className="flex-row genre">{record.genre}</div>
+        <div className="flex-row rating">{record.rating}</div>
+        <div className="flex-row deletebutton">
+          <button key={record.id} id={record.id} onClick={handleClick}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
       </div>
     );
   });
